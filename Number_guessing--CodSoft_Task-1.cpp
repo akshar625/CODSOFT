@@ -4,7 +4,7 @@
 using namespace std;
 
 void showMainMenu();
-void startGuessingGame();
+int startGuessingGame(); 
 void displayPreviousScore(int previousAttempts);
 void exitGame();
 int getNumberRange();
@@ -12,7 +12,7 @@ int getUserGuess();
 
 int main() {
     int userChoice;
-    int attempts = 0;
+    int attempts = 0; // Track the number of attempts
 
     while (true) {
         showMainMenu();
@@ -20,7 +20,7 @@ int main() {
 
         switch (userChoice) {
             case 1:
-                startGuessingGame();
+                attempts = startGuessingGame(); // Update the attempts after the game
                 break;
             case 2:
                 displayPreviousScore(attempts);
@@ -45,7 +45,7 @@ void showMainMenu() {
     cout << "Your choice: ";
 }
 
-void startGuessingGame() {
+int startGuessingGame() { // Changed return type to int
     int range = getNumberRange();
     int secretNumber, userGuess, attemptCount = 0;
     srand(static_cast<unsigned int>(time(nullptr))); 
@@ -70,6 +70,8 @@ void startGuessingGame() {
             }
         }
     } while (userGuess != secretNumber);
+
+    return attemptCount; // Return the number of attempts
 }
 
 void displayPreviousScore(int previousAttempts) {
